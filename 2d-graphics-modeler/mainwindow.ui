@@ -64,7 +64,7 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionContact"/>
+    <addaction name="actionContact_us"/>
    </widget>
    <widget class="QMenu" name="menuPalette">
     <property name="title">
@@ -84,7 +84,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionContact">
+  <action name="actionContact_us">
    <property name="text">
     <string>Contact</string>
    </property>
@@ -107,3 +107,4 @@
  <resources/>
  <connections/>
 </ui>
+
