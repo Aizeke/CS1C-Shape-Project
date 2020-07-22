@@ -25,9 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    adminlogin.cpp \
         main.cpp \
         mainwindow.cpp \
-    loginscreen.cpp \
+    contact.cpp \
     circle.cpp \
     shape.cpp \
     ellipse.cpp \
@@ -41,10 +42,10 @@ SOURCES += \
     renderarea.cpp \
     shapebuffer.cpp \
     shapeinfo.cpp
-
 HEADERS += \
+    adminlogin.h \
         mainwindow.h \
-    loginscreen.h \
+    contact.h \
     circle.h \
     shape.h \
     ellipse.h \
@@ -64,7 +65,9 @@ HEADERS += \
     ui_shapeinfo.h
 
 FORMS += \
+    adminlogin.ui \
         mainwindow.ui \
+    contact.ui \
     palette.ui
 
 # Default rules for deployment.
@@ -75,3 +78,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     shapeData.txt \
     shapeData.txt
+
+RESOURCES += \
+    logo.qrc
