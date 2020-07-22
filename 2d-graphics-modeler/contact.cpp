@@ -1,14 +1,14 @@
 #include "contact.h"
 #include "ui_contact.h"
 
-Contact::Contact(QWidget *parent) :
+contact::contact(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Contact)
+    ui(new Ui::contact)
 {
     ui->setupUi(this);
 }
 
-Contact::~Contact()
+contact::~contact()
 {
     delete ui;
 }
