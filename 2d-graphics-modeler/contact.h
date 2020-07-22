@@ -4,19 +4,19 @@
 #include <QDialog>
 
 namespace Ui {
-class Contact;
+class contact;
 }
 
-class Contact : public QDialog
+class contact : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Contact(QWidget *parent = nullptr);
-    ~Contact();
+    explicit contact(QWidget *parent = nullptr);
+    ~contact();
 
 private:
-    Ui::Contact *ui;
+    Ui::contact *ui;
 };
 
 #endif // CONTACT_H
