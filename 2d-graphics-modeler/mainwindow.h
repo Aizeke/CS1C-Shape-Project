@@ -9,6 +9,7 @@
 #include "contact.h"
 #include "palette.h"
 #include "shapeinfo.h"
+#include "ui_mainwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,14 +28,11 @@ public:
 
 private slots:
     void on_actionLogin_triggered();
-    void on_actionContact_Us_triggered();
     void on_actionSave_triggered();
     void on_actionOpen_triggered();
     void on_actionQuit_triggered();
 
     void on_actionShow_Info_triggered();
-    
-    void on_actionOpen_palette_triggered();
 
     void on_moveButton_clicked();
 
@@ -44,13 +42,17 @@ private slots:
 
     void on_actionLog_Out_triggered();
 
+    void on_actionContact_us_triggered();
+
+    void on_actionAdd_Shape_triggered();
+
 protected:
     void timerEvent (QTimerEvent* event);
 
 private:
     Ui::MainWindow *ui;
     adminLogin *admin;
-    Contact    *contact;
+    contact    *contactInfo;
     Palette    *palette;
     ShapeInfo *shapeInfo;
     QTime initialTime;
