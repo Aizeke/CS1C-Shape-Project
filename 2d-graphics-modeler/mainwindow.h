@@ -39,6 +39,7 @@ private slots:
     void on_actionShow_Area_triggered();
 
     void on_actionShow_Perimeter_triggered();
+      void on_actionOpen_palette_triggered();
 
     void on_actionLog_Out_triggered();
 
