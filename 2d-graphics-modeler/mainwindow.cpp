@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QFile>
 #include <QFileDialog>
 #include <QString>
 #include <QTextStream>
@@ -10,15 +11,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-        
+
+    QFile shapes(":text/img/shapeData.txt");
+
+    QTextStream inFile(&shapes);
+
     initialTime = QTime::currentTime ();
         
     startTimer (1000);
         
     renderArea = new RenderArea(this);
 
-    palette = new Palette(this);
-    palette->show();
+    admin = new adminLogin(this);
+    admin->show();
+
+    renderArea->createShapeBuffer(inFile);
+    //renderArea->buffer[1].shape.draw();
 }
 
 MainWindow::~MainWindow()
@@ -67,17 +75,6 @@ void MainWindow::on_actionLogin_triggered()
     admin -> show();
 }
 
-void MainWindow::on_actionContact_Us_triggered()
-{
-    contact = new Contact(this);
-   // contact -> adjustSize();
-   // contact -> setFixedSize(contact -> sizeHint());
-    contact -> show();
-}
-
-
-
-
 void MainWindow::on_actionOpen_triggered()
 {
     QString path=QFileDialog::getOpenFileName(this, "save.txt");
@@ -120,12 +117,6 @@ void MainWindow::on_actionQuit_triggered()
     QApplication::quit();
 }
 
-void MainWindow::on_actionOpen_palette_triggered()
-{
-    palette = new Palette(this);
-    palette -> show();
-}
-
 
 void MainWindow::on_actionShow_Info_triggered()
 {
@@ -135,8 +126,8 @@ void MainWindow::on_actionShow_Info_triggered()
 
 void MainWindow::on_moveButton_clicked()
 {
-    QString input = ui -> moveInput -> text();
-    renderArea->setIndex(input.toInt());
+    //QString input = ui -> moveInput -> text();
+    //renderArea->setIndex(input.toInt());
 
 }
 
@@ -158,3 +149,17 @@ void MainWindow::on_actionLog_Out_triggered()
     QMessageBox::information(this, "Log Out", "You have successfully logged out.");
 }
 
+
+void MainWindow::on_actionContact_us_triggered()
+{
+    contactInfo = new contact(this);
+    //contactInfo -> adjustSize();
+    //contactInfo -> setFixedSize(contactInfo -> sizeHint());
+    contactInfo -> show();
+}
+
+void MainWindow::on_actionAdd_Shape_triggered()
+{
+    palette = new Palette(this);
+    palette -> show();
+}
