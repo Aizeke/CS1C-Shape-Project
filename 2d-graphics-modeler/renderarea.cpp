@@ -57,8 +57,6 @@ void RenderArea::createShapeBuffer(QTextStream& is)
             shapeVector.resize(0);
         while(!is.atEnd())
         {
-            QString deleteSpace;
-            deleteSpace = is.readLine();
             ShapeBuffer x;
             x.readIn(is);
             buffer.push_back(x);
@@ -120,12 +118,12 @@ void RenderArea::paintEvent(QPaintEvent* event)
           transferToShapes();
           shapeBufferReady=false;
     }
-        for (auto it = shapeVector.begin(); it != shapeVector.end(); it++)
-        {
+
+    for (auto it = shapeVector.begin(); it != shapeVector.end(); it++)
+    {
             (*it)->passQPainter(&p);
             (*it)->draw();
-        }
-
+    }
 }
 
 void RenderArea::readOut(QTextStream& os)
