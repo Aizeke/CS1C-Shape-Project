@@ -1,7 +1,7 @@
-#include "adminlogin.h"
+#include "adminLogin.h"
+#include "ui_adminlogin.h"
 #include "QMessageBox"
 #include "mainwindow.h"
-#include "ui_adminlogin.h"
 #include <QPixmap>
 
 adminLogin::adminLogin(QWidget *parent) :
@@ -30,7 +30,6 @@ void adminLogin::on_loginButton_clicked()
         close();
         MainWindow* w = dynamic_cast<MainWindow*>(this->parentWidget());
         w->renderArea->enableAdmin();
-
     }
     else
     {
@@ -42,6 +41,8 @@ void adminLogin::mousePressEvent(QMouseEvent *e)
 {
     if(e->buttons() == Qt::LeftButton)
     {
+        ui -> usernameLabel -> hide();
+        ui -> passwordLabel -> hide();
         ui -> Username -> setEnabled(true);
         ui -> Password -> setEnabled(true);
         ui -> Username -> setFocus();
