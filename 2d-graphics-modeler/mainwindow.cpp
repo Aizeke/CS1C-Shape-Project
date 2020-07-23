@@ -1,10 +1,17 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QFile>
 #include <QFileDialog>
 #include <QString>
 #include <QTextStream>
 #include <iostream>
 #include <sstream>
+#include "shape.h"
+#include <QWidget>
+#include <QMessageBox>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,21 +19,29 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QFile shapes(":text/img/shapeData.txt");
+    QFile shapes("C:/Users/truon/OneDrive/Desktop/CS1C Proj/CS1C-Shape-Project/2d-graphics-modeler/shapeData.txt");
+    QFileInfo inf (shapes);
+    qDebug() << "File path : "<<inf.QFileInfo::path() << endl;
+    qDebug() << "Current path : " << QDir::currentPath() << endl;
+    qDebug() << "Current path (expected) : " << QDir::currentPath() + "/info.xml" << endl;
+    if(!shapes.open( QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug("could not open file\n");
+    }
+
 
     QTextStream inFile(&shapes);
 
     initialTime = QTime::currentTime ();
-        
+
     startTimer (1000);
-        
+
     renderArea = new RenderArea(this);
 
     admin = new adminLogin(this);
     admin->show();
 
     renderArea->createShapeBuffer(inFile);
-    //renderArea->buffer[1].shape.draw();
 }
 
 MainWindow::~MainWindow()
@@ -150,7 +165,7 @@ void MainWindow::on_actionLog_Out_triggered()
 }
 
 
-void MainWindow::on_actionContact_us_triggered()
+void MainWindow::on_actionContact_Us_triggered()
 {
     contactInfo = new contact(this);
     //contactInfo -> adjustSize();
@@ -158,7 +173,7 @@ void MainWindow::on_actionContact_us_triggered()
     contactInfo -> show();
 }
 
-void MainWindow::on_actionAdd_Shape_triggered()
+void MainWindow::on_actionOpen_palette_triggered()
 {
     palette = new Palette(this);
     palette -> show();
