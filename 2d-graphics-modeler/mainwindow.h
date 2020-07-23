@@ -42,9 +42,9 @@ private slots:
 
     void on_actionLog_Out_triggered();
 
-    void on_actionContact_us_triggered();
+    void on_actionContact_Us_triggered();
 
-    void on_actionAdd_Shape_triggered();
+    void on_actionOpen_palette_triggered();
 
 protected:
     void timerEvent (QTimerEvent* event);
