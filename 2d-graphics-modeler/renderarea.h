@@ -1,5 +1,3 @@
-
-
 #ifndef renderarea_h
 #define renderarea_h
 
@@ -7,7 +5,7 @@
 #include <QWidget>
 #include "shape.h"
 #include "line.h"
-#include "polyline.h"
+#include "polyLine.h"
 #include "polygon.h"
 #include "rectangle.h"
 #include "circle.h"
