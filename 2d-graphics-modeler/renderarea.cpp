@@ -57,6 +57,8 @@ void RenderArea::createShapeBuffer(QTextStream& is)
             shapeVector.resize(0);
         while(!is.atEnd())
         {
+            QString deleteSpace;
+            deleteSpace = is.readLine();
             ShapeBuffer x;
             x.readIn(is);
             buffer.push_back(x);
@@ -143,5 +145,3 @@ void RenderArea::setIndex(int x)
     if(x<=shapeVector.size())
         indexToChange= x-1;
 }
-
-
