@@ -7,160 +7,285 @@ ShapeBuffer::ShapeBuffer()
 
 void ShapeBuffer::readIn(QTextStream& is)
 {
-        QString myString = is.readLine();
+        is.read(1);
+        QString s = is.read(9);
+        QString myString = is.read(1);
+
         if(myString.isEmpty())
             throw MyException();
         shapeID = setInt(myString);
-        myString = is.readLine();
+        is.read(1);
+        s = is.read(11);
+        if (shapeID == 1 || shapeID == 8)
+            myString = is.read(4);
+        else if (shapeID == 2)
+            myString = is.read(8);
+        else if (shapeID == 3 || shapeID == 6)
+            myString = is.read(7);
+        else if (shapeID == 4)
+            myString = is.read(9);
+        else if (shapeID == 5 || shapeID == 7)
+            myString = is.read(6);
         shape = setShape(myString);
-
-    switch (shape) {
+        is.read(1);
+    switch (toupper(shape)) {
         case LINE:
         {
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(15);
             setLineDimensions(myString, one, two);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(4);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(1);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(11);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(7);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
             brush.setStyle(Qt::NoBrush);
         } break;
         case POLYLINE:{
-           myString = is.readLine();
+           s = is.read(17);
+           myString = is.read(34);
            qPolygon = setPolygonDimensions(myString);
-           myString = is.readLine();
+           is.read(1);
+           s = is.read(10);
+           myString = is.read(5);
            pen.setColor(setColor(myString));
-           myString = is.readLine();
+           is.read(1);
+           s = is.read(10);
+           myString = is.read(1);
            pen.setWidth(setInt(myString));
-           myString = is.readLine();
+           is.read(1);
+           s = is.read(10);
+           myString = is.read(9);
            pen.setStyle(setPenStyle(myString));
-           myString = is.readLine();
+           is.read(1);
+           s = is.read(13);
+           myString = is.read(7);
            pen.setCapStyle(setPenCapStyle(myString));
-           myString = is.readLine();
+           is.read(1);
+           s = is.read(14);
+           myString = is.read(9);
            pen.setJoinStyle(setPenJoinStyle(myString));
            brush.setStyle(Qt::NoBrush);
 
 
         } break;
         case POLYGON:{
-            myString = is.readLine();
+
+            s = is.read(17);
+            myString = is.read(34);
             qPolygon = setPolygonDimensions(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(4);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(1);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(14);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(7);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(6);
             brush.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(12);
             brush.setStyle(setBrushStyle(myString));
         } break;
         case ELLIPSE: {
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(18);
             qRect = setEllipseOrSquare(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(5);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(2);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(9);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(7);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(5);
             brush.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(7);
             brush.setStyle(setBrushStyle(myString));
         } break;
         case RECTANGLE:
         {
-            myString = is.readLine();
-            qRect = setQRect(myString);
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(17);
+            qRect = setEllipseOrSquare(myString);
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(4);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(1);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(8);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(8);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(3);
             brush.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(10);
             brush.setStyle(setBrushStyle(myString));
-
         }break;
         case SQUARE:
         {
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(13);
             qRect = setEllipseOrSquare(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(3);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(1);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(9);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(8);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(4);
             brush.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(10);
             brush.setStyle(setBrushStyle(myString));
 
         } break;
         case CIRCLE:
         {
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(13);
             qRect = setEllipseOrSquare(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(5);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(2);
             pen.setWidth(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(10);
+            myString = is.read(9);
             pen.setStyle(setPenStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(13);
+            myString = is.read(7);
             pen.setCapStyle(setPenCapStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(14);
+            myString = is.read(9);
             pen.setJoinStyle(setPenJoinStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(7);
             brush.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(12);
             brush.setStyle(setBrushStyle(myString));
-
         } break;
         case TEXT:
         {
-            myString = is.readLine();
+            s = is.read(17);
+            myString = is.read(17);
             qRect = setQRect(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(12);
+            myString = is.read(37);
             qStringText = setQStringText(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(11);
+            myString = is.read(4);
             pen.setColor(setColor(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(15);
+            myString = is.read(11);
             alignFlag = setTextAlignment(myString);
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(15);
+            myString = is.read(2);
             font.setPointSize(setInt(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(16);
+            myString = is.read(13);
             font.setFamily(setQStringText(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(15);
+            myString = is.read(11);
             font.setStyle(setTextFontStyle(myString));
-            myString = is.readLine();
+            is.read(1);
+            s = is.read(16);
+            myString = is.read(6);
             font.setWeight(setTextFontWeight(myString));
         } break;
     }//end switch block
@@ -192,8 +317,8 @@ void ShapeBuffer::readOut(QTextStream & os)
 
 int ShapeBuffer::setInt(QString& arg)const
 {
-    QStringList myList = arg.split(' ');
-    return myList[1].toInt();
+    //QStringList myList = arg.split(' ');
+    return arg.toInt();
 }
 ShapeType ShapeBuffer::setShape(QString& string3)const
 {    if (string3.contains("Polyline"))
@@ -342,19 +467,27 @@ void ShapeBuffer::setLineDimensions
 {
     x.remove(',');
     QStringList myList = x.split(' ');
-    one.setX(myList[1].toInt());
-    one.setY(myList[2].toInt());
-    two.setX(myList[3].toInt());
-    two.setY(myList[4].toInt());
+    one.setX(myList[0].toInt());
+    one.setY(myList[1].toInt());
+    two.setX(myList[2].toInt());
+    two.setY(myList[3].toInt());
 }
 
 QPolygon ShapeBuffer::setPolygonDimensions(QString & x) const
 {
+    int size = 0;
     x.remove(',');
     QStringList myList = x.split(' ');
+    QPoint points[4];
     QPolygon temp;
-    for (int i=1; i<myList.size(); i += 2)
-        temp << QPoint(myList[i].toInt(),myList[i+1].toInt());
+    for (int j = 0; j<myList.size()/2; j++)
+    {
+            points[j].setX(myList[size].toInt());
+            points[j].setY(myList[size + 1].toInt());
+            size += 2;
+    }
+    temp << points[0] << points[1] << points[2] << points[3];
+
     return temp;
 }
 
@@ -362,8 +495,11 @@ QRect ShapeBuffer::setQRect(QString & x) const
 {
     x.remove(',');
     QStringList myList = x.split(' ');
-    QRect temp(myList[1].toInt(),myList[2].toInt(),\
-            myList[3].toInt(),myList[4].toInt());
+    QRect temp;
+    temp.setX(myList[0].toInt());
+    temp.setY(myList[1].toInt());
+    temp.setWidth(myList[2].toInt());
+    temp.setHeight(myList[3].toInt());
     //constructor variables
     //(int x, int y, int width, int height)
     return temp;
@@ -375,8 +511,21 @@ QRect ShapeBuffer::setEllipseOrSquare(QString & x) const
 {
     x.remove(',');
     QStringList myList = x.split(' ');
-    QRect temp(myList[1].toInt(),myList[2].toInt(),\
-            myList[3].toInt(),myList[3].toInt());
+    QRect temp;
+    if (myList.size() == 4)
+    {
+        temp.setX(myList[0].toInt());
+        temp.setY(myList[1].toInt());
+        temp.setWidth(myList[2].toInt());
+        temp.setHeight(myList[3].toInt());
+    }
+    else
+    {
+        temp.setX(myList[0].toInt());
+        temp.setY(myList[1].toInt());
+        temp.setWidth(myList[2].toInt());
+        temp.setHeight(myList[2].toInt());
+    }
     //constructor variables
     //(int x, int y, int width, int height)
     return temp;
@@ -385,7 +534,7 @@ QRect ShapeBuffer::setEllipseOrSquare(QString & x) const
 QString ShapeBuffer::setQStringText(QString & x) const
 {
     QStringList myList = x.split(':');
-    QString temp = myList[1];
+    QString temp = myList[0];
     return temp.trimmed();
 }
 
@@ -565,3 +714,4 @@ QString ShapeBuffer::printGobalColor(QColor arg) const
     if(arg== Qt::gray) return "gray";
     return "red";
 }
+
