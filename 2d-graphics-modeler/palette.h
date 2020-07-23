@@ -61,3 +61,4 @@ private:
 };
 
 #endif // PALETTE_H
+
