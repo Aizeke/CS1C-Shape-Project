@@ -1,5 +1,3 @@
-
-
 #include "palette.h"
 #include "shape.h"
 #include "mainwindow.h"
@@ -133,3 +131,4 @@ void Palette::on_horizontalSlider_4_valueChanged(int value)
     shapeB = value;
     updateBackground();
 }
+
