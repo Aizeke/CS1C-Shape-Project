@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/CamelCaseIncLogo.png</file>
+    </qresource>
+    <qresource prefix="/text">
+        <file>img/shapeData.txt</file>
+    </qresource>
+</RCC>
