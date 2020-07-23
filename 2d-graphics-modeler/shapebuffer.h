@@ -21,6 +21,7 @@ class ShapeBuffer
     friend class Circle; friend class Ellipse; friend class Line;
     friend class Polygon; friend class Rectangle; friend class Square;
     friend class Shape; friend class Text; friend class PolyLine;
+    friend class RenderArea;
 
 public:
     ShapeBuffer();
