@@ -565,4 +565,3 @@ QString ShapeBuffer::printGobalColor(QColor arg) const
     if(arg== Qt::gray) return "gray";
     return "red";
 }
-
